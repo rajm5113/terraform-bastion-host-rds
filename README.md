@@ -48,7 +48,7 @@ one command.
 ### The bastion host idea in one picture
 
 <p align="center">
-  <img src="docs/images/02-bastion-host-concept.png" alt="Bastion host concept: Database (private resource) <-> Bastion Host (bridge) <-> Authorized User (SSH key)" width="850">
+  <img src="images/02-bastion-host-concept.png" alt="Bastion host concept: Database (private resource) <-> Bastion Host (bridge) <-> Authorized User (SSH key)" width="850">
 </p>
 
 * **Database**: a private resource with no public IP and no internet route.
@@ -60,7 +60,7 @@ one command.
 ## 2. Architecture
 
 <p align="center">
-  <img src="docs/images/01-architecture-diagram.png" alt="Architectural diagram: VPC with private subnet (RDS) and public subnet (EC2 bastion host), user connects with SSH key" width="850">
+  <img src="images/01-architecture-diagram.png" alt="Architectural diagram: VPC with private subnet (RDS) and public subnet (EC2 bastion host), user connects with SSH key" width="850">
 </p>
 
 The VPC and its subnets were **pre-provisioned** (via a CloudFormation stack).
@@ -71,7 +71,7 @@ runs inside them.
 <summary><b>Detailed AWS diagram (click to expand)</b></summary>
 <br>
 <p align="center">
-  <img src="docs/images/03-architecture-aws-detailed.png" alt="Detailed AWS bastion host architecture" width="750">
+  <img src="images/bastion_host.drawio.png" alt="Detailed AWS bastion host architecture" width="750">
 </p>
 </details>
 
@@ -140,12 +140,12 @@ flowchart LR
 │           └── outputs.tf             # Module outputs (password marked sensitive)
 ├── scripts/
 │   └── show_connection_info.sh        # Prints bastion DNS, DB endpoint and psql command
-├── docs/images/                       # Diagrams and screenshots used in this README
+├── images/                       # Diagrams and screenshots used in this README
 └── .github/workflows/terraform-ci.yml # CI: terraform fmt + validate on every push
 ```
 
 <p align="center">
-  <img src="docs/images/04-project-structure.png" alt="Project structure in the editor, highlighting the resource files ec2.tf, network.tf and rds.tf" width="800">
+  <img src="images/04-project-structure.png" alt="Project structure in the editor, highlighting the resource files ec2.tf, network.tf and rds.tf" width="800">
 </p>
 
 The **root module** is thin on purpose. It only wires variables into the
@@ -161,7 +161,7 @@ inputs.
 [`modules/bastion_host/providers.tf`](terraform/modules/bastion_host/providers.tf)
 
 <p align="center">
-  <img src="docs/images/05-providers-required.png" alt="required_providers block: aws, local, random, tls with purpose of each" width="800">
+  <img src="images/05-providers-required.png" alt="required_providers block: aws, local, random, tls with purpose of each" width="800">
 </p>
 
 | Provider | Version | Used for |
@@ -176,7 +176,7 @@ to every resource, so you can always tell which project a resource belongs to
 and that Terraform manages it:
 
 <p align="center">
-  <img src="docs/images/06-providers-aws-default-tags.png" alt="provider aws block with region = var.region and default_tags including project = var.project" width="800">
+  <img src="images/06-providers-aws-default-tags.png" alt="provider aws block with region = var.region and default_tags including project = var.project" width="800">
 </p>
 
 ### 5.2 Variables: no hard-coded infrastructure IDs
@@ -220,7 +220,7 @@ ingress {
 The lab gave me a template with `None` placeholders to fill in:
 
 <p align="center">
-  <img src="docs/images/07-rds-starter-template.png" alt="Starter template of rds.tf with None placeholders to be completed" width="850">
+  <img src="images/07-rds-starter-template.png" alt="Starter template of rds.tf with None placeholders to be completed" width="850">
 </p>
 
 My completed version:
@@ -359,7 +359,7 @@ details at any time with:
 ```
 
 <p align="center">
-  <img src="docs/images/08-aws-console.png" alt="AWS Management Console of the lab account (us-east-1)" width="750">
+  <img src="images/08-aws-console.png" alt="AWS Management Console of the lab account (us-east-1)" width="750">
   <br><em>The resources are deployed into a sandboxed AWS lab account in <code>us-east-1</code>.</em>
 </p>
 
@@ -381,7 +381,7 @@ I opened a shell on the bastion with **EC2 Instance Connect** (AWS Console →
 EC2 → Instances → `de-c2w3lab1-bastion-host` → *Connect*):
 
 <p align="center">
-  <img src="docs/images/09-ec2-instance-connect.png" alt="EC2 Instance Connect screen for de-c2w3lab1-bastion-host" width="650">
+  <img src="images/Connect_to_instance.png" alt="EC2 Instance Connect screen for de-c2w3lab1-bastion-host" width="650">
 </p>
 
 Alternatively, with the generated key:
@@ -449,6 +449,6 @@ This lab is intentionally simple. In a production setting I would:
 ## 12. Credits
 
 - Lab: **"Implementing DataOps with Terraform"**, *DeepLearning.AI Data Engineering Professional Certificate* on Coursera (Course 2, Week 3). The starter skeleton, the lab AWS environment, the SQL scripts and the dataset were provided by the course. The completed Terraform configuration, repo organisation, helper script, CI workflow and this write-up are my own work.
-- Slide and architecture images in `docs/images/` are © DeepLearning.AI and are used here only to illustrate the lab.
+- Slide, architecture and lab screenshots in `images/` are © DeepLearning.AI and are used here only to illustrate the lab.
 
 **Author:** Raj · [GitHub @rajm5113](https://github.com/rajm5113)
