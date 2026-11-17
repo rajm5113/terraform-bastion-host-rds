@@ -1,0 +1,8 @@
+# Copy this file to terraform.tfvars and fill in the IDs of the
+# pre-provisioned network (CloudFormation stack -> Outputs tab).
+# terraform.tfvars is git-ignored on purpose.
+
+vpc_id              = "vpc-xxxxxxxxxxxxxxxxx"
+public_subnet_id    = "subnet-xxxxxxxxxxxxxxxxx" # public subnet, AZ A
+private_subnet_a_id = "subnet-xxxxxxxxxxxxxxxxx" # private subnet, AZ A
+private_subnet_b_id = "subnet-xxxxxxxxxxxxxxxxx" # private subnet, AZ B
